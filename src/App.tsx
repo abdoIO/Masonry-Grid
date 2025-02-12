@@ -1,14 +1,20 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import MasonryGrid from './components/MansoryGrid'
+import PhotoDetail from './components/PhotoDetail'
+import { LoadingProvider } from './context/LoadingContext'
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>My App</h1>
-      </header>
-    </div>
-  );
+    <LoadingProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MasonryGrid />} />
+          <Route path="/photo/:id" element={<PhotoDetail />} />
+        </Routes>
+      </Router>
+    </LoadingProvider>
+  )
 }
 
-export default App;
+export default App

@@ -1,6 +1,66 @@
-# Getting Started with Create React App
+# Masonry Grid Image Gallery
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive image gallery built with React, TypeScript, and styled-components, featuring infinite scroll and optimized image loading.
+
+## Design Decisions
+
+### Architecture and Component Structure
+
+1. **Component Organization**
+
+   - Components are organized by feature and shared functionality
+   - Shared components are placed in a `shared` directory for reusability
+   - Styles are co-located with their components for better maintainability
+
+2. **Performance Optimizations**
+
+   - Lazy loading images using `IntersectionObserver`
+   - Eager loading for above-fold content
+   - Memoization of components and expensive calculations
+   - Image optimization with different sizes based on viewport
+
+3. **State Management**
+
+   - Context API for global loading and error states
+   - Local state for component-specific data
+   - Custom hooks for reusable logic and data fetching
+
+4. **Loading States**
+
+   - Initial page load shows a full-screen loading indicator
+   - Infinite scroll shows a minimal loading indicator at the bottom
+
+5. **Error Handling**
+
+   - Centralized error handling through LoadingContext
+   - User-friendly error messages with toast notifications
+   - Graceful fallbacks for failed image loads
+
+6. **Styling Approach**
+
+   - Styled-components for component-scoped CSS
+   - Responsive design with mobile-first approach
+   - Consistent styling through shared variables and themes
+
+7. **Code Quality**
+
+   - TypeScript for type safety
+   - Memoization to prevent unnecessary re-renders
+   - Consistent file and folder structure
+   - Separation of concerns between components
+
+8. **User Experience**
+
+   - Smooth transitions between loading states
+   - Responsive grid layout adapting to screen size
+   - Optimized image loading based on viewport
+   - Clear loading and error feedback
+
+9. **Testing and Maintainability**
+   - Components designed for testability
+   - Props interfaces clearly defined
+   - Consistent naming conventions
+   - Modular code structure for easy updates
 
 ## Available Scripts
 
@@ -24,20 +84,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `yarn run analyze`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Analyzes the bundle size using source-map-explorer.
 
 ## Learn More
 
