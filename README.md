@@ -14,6 +14,7 @@ A responsive image gallery built with React, TypeScript, and styled-components, 
 
 2. **Performance Optimizations**
 
+   - Masonry grid layout using `useMasonryLayout` hook
    - Lazy loading images using `IntersectionObserver`
    - Eager loading for above-fold content
    - Memoization of components and expensive calculations

@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useCallback } from 'react'
 import { AxiosError } from 'axios'
 import styled from 'styled-components'
 import { slideIn, animationDurations } from '../components/shared/styles/animations'
-import { LoadingFallback } from '../components/shared/loading/LoadingFallback'
 
 const ErrorToast = styled.div`
   position: fixed;
@@ -128,7 +127,6 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   return (
     <LoadingContext.Provider value={value}>
       {children}
-      {(loading.global || loading.api) && <LoadingFallback />}
       {error && (
         <ErrorToast>
           <span>{error}</span>

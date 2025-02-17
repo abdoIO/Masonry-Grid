@@ -1,38 +1,30 @@
-import { useCallback } from 'react'
-import { useInView } from 'react-intersection-observer'
-
-interface UseInfiniteScrollOptions {
-  onLoadMore: () => void
-  isLoading: boolean
-  hasError: boolean
-  rootMargin?: string
-  threshold?: number
-  delay?: number
-}
+import { useCallback, useState } from 'react'
+import { UseInfiniteScrollProps, UseInfiniteScrollResult } from '../types/components'
 
 export const useInfiniteScroll = ({
   onLoadMore,
   isLoading,
-  hasError,
-  rootMargin = '500px',
-  threshold = 0,
-  delay = 100,
-}: UseInfiniteScrollOptions) => {
-  const handleInView = useCallback(
-    (inView: boolean) => {
-      if (inView && !isLoading && !hasError) {
+  threshold = 1000,
+}: UseInfiniteScrollProps): UseInfiniteScrollResult => {
+  const [scrollTop, setScrollTop] = useState(0)
+
+  const handleScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => {
+      const container = e.currentTarget
+      setScrollTop(container.scrollTop)
+
+      const scrollBottom = container.scrollTop + container.clientHeight
+      const scrollThreshold = container.scrollHeight - threshold
+
+      if (scrollBottom >= scrollThreshold && !isLoading) {
         onLoadMore()
       }
     },
-    [isLoading, hasError, onLoadMore],
+    [onLoadMore, isLoading, threshold],
   )
 
-  const { ref } = useInView({
-    threshold,
-    rootMargin,
-    delay,
-    onChange: handleInView,
-  })
-
-  return { ref }
+  return {
+    scrollTop,
+    handleScroll,
+  }
 }
